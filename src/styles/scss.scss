@@ -1,13 +1,13 @@
-@border: 6px solid #ccc;
+$border: 6px solid rgb(150, 12, 150);
 
-.box {
+.box2 {
   padding: 2rem;
   border-radius: 5px;
   margin-top: 1rem;
-  border: @border;
+  border: $border;
 
   h2 {
     text-align: center;
-    color: rgb(51, 119, 12);
+    color: rgb(185, 110, 40);
   }
 }
