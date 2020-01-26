@@ -25,3 +25,9 @@ body {
   height: 200px;
   width: 200px;
 }
+
+hr {
+  border-top: 2px solid rgb(4, 0, 255);
+  width: 100vw;
+  margin: 30px auto;
+}
