@@ -1,0 +1,26 @@
+@import "./roboto.css";
+
+body {
+  /* font-family: Roboto, sans-serif; */
+  font-family: BebasNue, sans-serif;
+  font-size: 1.2rem;
+  background-color: #94cef5;
+  height: 100vh;
+}
+
+.container {
+  padding-top: 2rem;
+  min-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  background-image: url('../assets/webpack-logo.png');
+  background-size: cover;
+  height: 200px;
+  width: 200px;
+}
