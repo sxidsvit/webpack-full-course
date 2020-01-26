@@ -1,8 +1,9 @@
+@import "~normalize.css";
 @import "./roboto.css";
 
 body {
   /* font-family: Roboto, sans-serif; */
-  font-family: BebasNue, sans-serif;
+  font-family: Roboto, sans-serif;
   font-size: 1.2rem;
   background-color: #94cef5;
   height: 100vh;
