@@ -31,3 +31,7 @@ hr {
   width: 100vw;
   margin: 30px auto;
 }
+
+.code {
+  color: rgba(129, 5, 30, 0.966);
+}
