@@ -3,8 +3,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
-  context: path.resolve(__dirname, 'src'),
   mode: 'development',
+  context: path.resolve(__dirname, 'src'),
   entry: {
     main: './index.js',
     analytics: './analitics.js'
@@ -12,6 +12,14 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].[contenthash].js'
+  },
+  resolve: {
+    extensions: ['.js', '.csv', '.json', '.xml', '.png'],
+    alias: {
+      '@models': path.resolve(__dirname, 'src/models'),
+      '@styles': path.resolve(__dirname, 'src/styles'),
+      '@': path.resolve(__dirname, 'src')
+    }
   },
   plugins: [
     new HtmlWebpackPlugin({
