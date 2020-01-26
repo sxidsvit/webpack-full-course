@@ -27,6 +27,22 @@ const optimization = () => {
 
 const filename = ext => isDev ? `[name].[hash].${ext}` : `[name].${ext}`
 
+const cssLoaders = (extra) => {
+  const loaders = [{
+    loader: miniCssExtractPlugin.loader,
+    options: {
+      hmr: isDev,
+      reloadAll: true
+    }
+  },
+    'css-loader'
+  ]
+  if (extra) {
+    loaders.push(extra)
+  }
+  return loaders
+}
+
 module.exports = {
   mode: 'development',
   context: path.resolve(__dirname, 'src'),
@@ -75,41 +91,15 @@ module.exports = {
     rules: [
       {
         test: /\.css$/,
-        use: [{
-          loader: miniCssExtractPlugin.loader,
-          options: {
-            hmr: isDev,
-            reloadAll: true
-          }
-        },
-          'css-loader'
-        ]
+        use: cssLoaders()
       },
       {
         test: /\.less$/,
-        use: [{
-          loader: miniCssExtractPlugin.loader,
-          options: {
-            hmr: isDev,
-            reloadAll: true
-          }
-        },
-          'css-loader',
-          'less-loader'
-        ]
+        use: cssLoaders('less-loader')
       },
       {
         test: /\.s[ac]ss$/,
-        use: [{
-          loader: miniCssExtractPlugin.loader,
-          options: {
-            hmr: isDev,
-            reloadAll: true
-          }
-        },
-          'css-loader',
-          'sass-loader'
-        ]
+        use: cssLoaders('sass-loader')
       },
       {
         test: /\.(png|jp?g|gif|svg)$/,
