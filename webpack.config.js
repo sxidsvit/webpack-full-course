@@ -8,7 +8,7 @@ const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plug
 
 const isDev = process.env.NODE_ENV === 'development'
 const isProd = !isDev
-console.log('isProd: ', isProd);
+
 const optimization = () => {
   const config = {
     splitChunks: {
@@ -22,11 +22,10 @@ const optimization = () => {
     ],
       config.minimize = true
   }
-
-  console.log('config: ', config);
   return config
 }
 
+const filename = ext => isDev ? `[name].[hash].${ext}` : `[name].${ext}`
 
 module.exports = {
   mode: 'development',
@@ -37,7 +36,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].[contenthash].js'
+    filename: filename('js')
   },
   resolve: {
     extensions: ['.js', '.csv', '.json', '.xml', '.png'],
@@ -69,7 +68,7 @@ module.exports = {
       }
     ]),
     new miniCssExtractPlugin({
-      filename: '[name].[contenthash].css'
+      filename: filename('css')
     })
   ],
   module: {
@@ -84,6 +83,19 @@ module.exports = {
           }
         },
           'css-loader'
+        ]
+      },
+      {
+        test: /\.less$/,
+        use: [{
+          loader: miniCssExtractPlugin.loader,
+          options: {
+            hmr: isDev,
+            reloadAll: true
+          }
+        },
+          'css-loader',
+          'less-loader'
         ]
       },
       {
