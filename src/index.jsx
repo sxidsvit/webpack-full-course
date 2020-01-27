@@ -1,21 +1,32 @@
+/* ---------- импорт пакетов ---------------------- */
+import React from 'react'
+import { render } from 'react-dom'
+/* ---------- импорт библиотеки ------------------- */
 import * as $ from 'jquery'
+/* ---------- импорт класса ----------------------- */
 import Post from '@models/Post'
+/* ---------- импорт файлов ----------------------- */
 import WebpackLogo from '@/assets/webpack-logo'
 import '@styles/styles.css'
 import '@styles/less.less'
 import '@styles/scss.scss'
 import '@/babel.js'
-import React from 'react'
-import { render } from 'react-dom'
+import json from './assets/json'
+import xml from './assets/data.xml'
+import csv from './assets/data.csv'
 
-// import json from './assets/json'
-// import xml from './assets/data.xml'
-// import csv from './assets/data.csv'
+console.log('JSON: ', json);
+console.log('XML: ', xml);
+console.log('CSV: ', csv);
+
+/* ---------- инстанс клвсса Post ----------------- */
 
 const post = new Post('Webpack Post Title', WebpackLogo)
 
 console.log('Post to String: ', post.toString());
 $('pre').addClass('code').html(post.toString())
+
+/* ----------- React ----------------------------- */
 
 const App = () => (
   <div className="container">
@@ -35,7 +46,3 @@ const App = () => (
 )
 
 render(<App />, document.getElementById('app'))
-
-// console.log('JSON: ', json);
-// console.log('XML: ', xml);
-// console.log('CSV: ', csv);

@@ -12,3 +12,7 @@ class Utill {
 
 console.log('Utill.id: ', Utill.id)
 console.log('unsed: ', unsed);
+
+import('lodash').then(_ => {
+  console.log('lodash ', _.random(0, 42, true))
+})
