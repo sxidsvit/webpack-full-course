@@ -7,6 +7,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const miniCssExtractPlugin = require('mini-css-extract-plugin')
 const TerserWebpackPlugin = require('terser-webpack-plugin')
 const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin')
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 
 /* --------------- constants  --------------------------------- */
 
@@ -75,6 +76,32 @@ const jsLoaders = () => {
   return loaders
 }
 
+const plugins = () => {
+  const base = [
+    new HtmlWebpackPlugin({
+      template: './index.html',
+      minify: {
+        collapseWhitespace: isProd
+      }
+    }),
+    new CleanWebpackPlugin(),
+    new CopyWebpackPlugin([
+      {
+        from:
+          path.resolve(__dirname, 'src/assets/img/favicon.ico'),
+        to:
+          path.resolve(__dirname, 'dist/img/favicon.ico')
+      }
+    ]),
+    new miniCssExtractPlugin({
+      filename: filename('css')
+    })
+  ]
+  if (isProd) {
+    base.push(new BundleAnalyzerPlugin())
+  }
+  return base
+}
 /* ---------------- module.exports ------------------------ */
 
 module.exports = {
@@ -102,26 +129,7 @@ module.exports = {
     hot: isDev
   },
   devtool: isDev ? 'source-map' : '',
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: './index.html',
-      minify: {
-        collapseWhitespace: isProd
-      }
-    }),
-    new CleanWebpackPlugin(),
-    new CopyWebpackPlugin([
-      {
-        from:
-          path.resolve(__dirname, 'src/assets/img/favicon.ico'),
-        to:
-          path.resolve(__dirname, 'dist/img/favicon.ico')
-      }
-    ]),
-    new miniCssExtractPlugin({
-      filename: filename('css')
-    })
-  ],
+  plugins: plugins(),
   module: {
     rules: [
       {
