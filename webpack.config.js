@@ -48,7 +48,7 @@ module.exports = {
   context: path.resolve(__dirname, 'src'),
   entry: {
     main: ['@babel/polyfill', './index.js'],
-    analytics: './analitics.js'
+    analytics: './analitics.ts'
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -97,6 +97,22 @@ module.exports = {
           options: {
             "presets": [
               "@babel/preset-env",
+            ],
+            plugins: [
+              '@babel/plugin-proposal-class-properties'
+            ]
+          }
+        }
+      },
+      {
+        test: /\.ts$/,
+        exclude: /node_modules/,
+        loader: {
+          loader: 'babel-loader',
+          options: {
+            "presets": [
+              '@babel/preset-env',
+              '@babel/preset-typescript'
             ],
             plugins: [
               '@babel/plugin-proposal-class-properties'
