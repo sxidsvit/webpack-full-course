@@ -3,3 +3,9 @@ async function start() {
 }
 
 start().then(console.log)
+
+class Utill {
+  static id = Date.now()
+}
+
+console.log('Utill.id: ', Utill.id)
