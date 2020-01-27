@@ -43,11 +43,26 @@ const cssLoaders = (extra) => {
   return loaders
 }
 
+const babelOptions = preset => {
+  const opts = {
+    "presets": [
+      '@babel/preset-env',
+    ],
+    plugins: [
+      '@babel/plugin-proposal-class-properties'
+    ]
+  }
+  if (preset) {
+    opts.presets.push(preset)
+  }
+  return opts
+}
+
 module.exports = {
   mode: 'development',
   context: path.resolve(__dirname, 'src'),
   entry: {
-    main: ['@babel/polyfill', './index.js'],
+    main: ['@babel/polyfill', './index.jsx'],
     analytics: './analitics.ts'
   },
   output: {
@@ -94,14 +109,7 @@ module.exports = {
         exclude: /node_modules/,
         loader: {
           loader: 'babel-loader',
-          options: {
-            "presets": [
-              "@babel/preset-env",
-            ],
-            plugins: [
-              '@babel/plugin-proposal-class-properties'
-            ]
-          }
+          options: babelOptions()
         }
       },
       {
@@ -109,15 +117,15 @@ module.exports = {
         exclude: /node_modules/,
         loader: {
           loader: 'babel-loader',
-          options: {
-            "presets": [
-              '@babel/preset-env',
-              '@babel/preset-typescript'
-            ],
-            plugins: [
-              '@babel/plugin-proposal-class-properties'
-            ]
-          }
+          options: babelOptions('@babel/preset-typescript')
+        }
+      },
+      {
+        test: /\.jsx$/,
+        exclude: /node_modules/,
+        loader: {
+          loader: 'babel-loader',
+          options: babelOptions('@babel/preset-react')
         }
       },
       {
