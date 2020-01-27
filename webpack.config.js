@@ -1,3 +1,5 @@
+/* --------------- modules & plugins --------------------------- */
+
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
@@ -6,8 +8,12 @@ const miniCssExtractPlugin = require('mini-css-extract-plugin')
 const TerserWebpackPlugin = require('terser-webpack-plugin')
 const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin')
 
+/* --------------- constants  --------------------------------- */
+
 const isDev = process.env.NODE_ENV === 'development'
 const isProd = !isDev
+
+/* --------------- functions --------------------------------- */
 
 const optimization = () => {
   const config = {
@@ -57,6 +63,19 @@ const babelOptions = preset => {
   }
   return opts
 }
+
+const jsLoaders = () => {
+  const loaders = [{
+    loader: 'babel-loader',
+    options: babelOptions()
+  }]
+  if (isDev) {
+    loaders.push('eslint-loader')
+  }
+  return loaders
+}
+
+/* ---------------- module.exports ------------------------ */
 
 module.exports = {
   mode: 'development',
@@ -108,10 +127,7 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: {
-          loader: 'babel-loader',
-          options: babelOptions()
-        }
+        use: jsLoaders()
       },
       {
         test: /\.ts$/,
