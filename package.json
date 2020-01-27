@@ -1,7 +1,11 @@
 {
   "name": "webpacksxidsvit",
   "version": "1.0.0",
-  "description": "studying webpack",
+  "description": "studying webpack 2020",
+  "repositiry": {
+    "type": "git",
+    "url": "https://github.com/sxidsvit/webpack-full-course"
+  },
   "private": true,
   "scripts": {
     "webpack": "npx webpack --config webpack.config.js",
@@ -16,7 +20,7 @@
     "js",
     "webpack"
   ],
-  "author": "sxidsvit <sxidsvit>@gmail.com",
+  "author": "sxidsvit <s.p.antonyuk>@gmail.com",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.8.3",
